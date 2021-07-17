@@ -18,6 +18,7 @@ export class UserService {
         id: user.id,
         name: user.name,
         email: user.email,
+        rodrigo: false,
       };
     });
     return result;
