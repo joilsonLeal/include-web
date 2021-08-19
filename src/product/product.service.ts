@@ -13,13 +13,12 @@ export class ProductService {
 
   async create(createProductDto: CreateProductDto) {
     await this.productRepository.save({
-      name: createProductDto.name,
+      name: 'serjo junior',
     });
-    return 'This action adds a new product';
   }
 
-  findAll() {
-    return `This action returns all product`;
+  async findAll() {
+    return await this.productRepository.find();
   }
 
   findOne(id: number) {
