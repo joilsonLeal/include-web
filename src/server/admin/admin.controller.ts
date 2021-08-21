@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AdminService } from './admin.service';
+import { CreateAdminDto } from './dto/create.dto';
 
 @Controller('admins')
 export class AdminController {
@@ -13,8 +14,7 @@ export class AdminController {
   }
 
   @Post()
-  async create(@Body() data: any) {
-    console.log(data);
+  async create(@Body() data: CreateAdminDto) {
     return await this.adminService.create(data);
   }
 }
