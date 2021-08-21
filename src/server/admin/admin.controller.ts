@@ -27,6 +27,6 @@ export class AdminController {
   @UseGuards(JwtAuthGuard)
   @Get('protected')
   async protect(@Request() req) {
-    return 'protected';
+    return req.user;
   }
 }
