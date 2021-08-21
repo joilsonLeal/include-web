@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create.dto';
@@ -7,7 +14,6 @@ import { CreateAdminDto } from './dto/create.dto';
 export class AdminController {
   constructor(private adminService: AdminService) {}
 
-  // @UseGuards(JwtAuthGuard)
   @Get()
   async list() {
     return await this.adminService.findAll();
@@ -16,5 +22,11 @@ export class AdminController {
   @Post()
   async create(@Body() data: CreateAdminDto) {
     return await this.adminService.create(data);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('protected')
+  async protect(@Request() req) {
+    return req.user;
   }
 }
