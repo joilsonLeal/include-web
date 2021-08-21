@@ -13,6 +13,9 @@ export const databaseProviders = [
         database: 'include-web',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
+        extra: {
+          connectionLimit: 2,
+        },
       }),
   },
 ];

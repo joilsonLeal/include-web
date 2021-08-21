@@ -1,18 +1,19 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
-import { UserModule } from 'src/backoffice/user/user.module';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
 import { JwtStrategy } from './jtw.strategy';
+import { AdminModule } from '../admin/admin.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    UserModule,
+    ConfigModule,
+    AdminModule,
     PassportModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1d' },
     }),
   ],
