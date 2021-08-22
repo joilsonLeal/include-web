@@ -18,6 +18,7 @@ export class AdminService {
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.roles,
       };
     });
     return result;
@@ -31,7 +32,7 @@ export class AdminService {
     try {
       await this.adminRepository.save({
         email: dto.email,
-        roles: AdminRoles.MASTER,
+        roles: AdminRoles[dto.roles.toUpperCase()],
         password: bcrypt.hashSync(dto.password, 8),
         name: dto.name,
       });

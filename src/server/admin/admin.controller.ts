@@ -6,7 +6,10 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { AdminRoles } from 'src/enums/AdminRoles';
+import { Roles } from 'src/server/auth/decorators/roles.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create.dto';
 
@@ -24,7 +27,8 @@ export class AdminController {
     return await this.adminService.create(data);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(AdminRoles.MASTER, AdminRoles.REAL_STATE_BROKER)
   @Get('protected')
   async protect(@Request() req) {
     return req.user;
