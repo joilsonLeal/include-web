@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Offer } from "./offer.entity";
 
 @Entity('immobiles')
 export class Immobile {
@@ -7,6 +8,9 @@ export class Immobile {
     
     @Column({ length: 255, unique: true })
     name: string;
+
+    @OneToMany(type => Offer, entity => entity.immobile)
+    offers: Offer[];
 
     @CreateDateColumn({ type: 'datetime', nullable: true })
     created_at: Date;
