@@ -1,5 +1,5 @@
 export enum AdminRoles {
-  MASTER = 0,
-  REAL_STATE_MASTER = 1,
-  REAL_STATE_BROKER = 2,
+  MASTER = 'master',
+  REAL_STATE_MASTER = 'real_state_master',
+  REAL_STATE_BROKER = 'real_state_broker',
 }

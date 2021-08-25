@@ -18,7 +18,7 @@ export class AuthService {
         name: user.name,
         id: user.id,
         email: user.email,
-        role: AdminRoles[user.roles].toLocaleLowerCase(),
+        role: AdminRoles[user.roles.toUpperCase()],
       };
       return {
         access_token: this.jwtService.sign(payload),
